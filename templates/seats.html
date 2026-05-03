@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Seat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">Select Seats</div>
+
+<div class="seat-grid">
+
+{% for i in range(1,21) %}
+    {% if i|string in booked_seats %}
+        <div class="seat booked">{{ i }}</div>
+    {% else %}
+        <div class="seat" onclick="selectSeat(this, {{ i }})">{{ i }}</div>
+    {% endif %}
+{% endfor %}
+
+</div>
+
+<form action="/book" method="POST" style="text-align:center;">
+    <input type="hidden" name="bus_id" value="{{ bus.id }}">
+    <input type="hidden" name="date" value="{{ date }}">
+    <input type="hidden" id="seatInput" name="seat">
+
+    <button type="submit">Confirm Booking</button>
+</form>
+
+<script>
+function selectSeat(el, num){
+    document.querySelectorAll('.seat').forEach(s=>s.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('seatInput').value=num;
+}
+</script>
+
+</body>
+</html>

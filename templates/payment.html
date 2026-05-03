@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .card {
+            width: 380px;
+            margin: 80px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .details {
+            text-align: left;
+            margin: 15px 0;
+        }
+
+        .details p {
+            margin: 6px 0;
+        }
+
+        .amount {
+            font-size: 28px;
+            color: green;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 14px;
+            background: #0a8f08;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .pay-btn:hover {
+            background: #066d06;
+        }
+
+        .upi {
+            margin-top: 10px;
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <h2>💳 Secure Payment</h2>
+
+    <div class="details">
+        <p><b>Bus:</b> {{ bus_id }}</p>
+        <p><b>Seat:</b> {{ seat }}</p>
+        <p><b>Date:</b> {{ date }}</p>
+    </div>
+
+    <div class="amount">₹ {{ amount/100 }}</div>
+
+    <button class="pay-btn" id="payBtn">Pay Now</button>
+
+    <div class="upi">UPI / Cards / Net Banking</div>
+
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<button id="payBtn">Pay Now</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+document.getElementById('payBtn').onclick=function(e){
+
+var rzp=new Razorpay({
+key:"rzp_test_xxxxx",
+amount:"{{ amount }}",
+order_id:"{{ order_id }}",
+handler:function(){
+window.location="/success?bus_id={{bus_id}}&seat={{seat}}&date={{date}}";
+}
+});
+
+rzp.open();
+e.preventDefault();
+}
+</script>
+
+</body>
+</html>

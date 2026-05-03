@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">Available Buses</div>
+
+{% for bus in buses %}
+<div class="bus-card">
+
+    <h3>{{ bus.from }} → {{ bus.to }}</h3>
+    <p>Time: {{ bus.time }}</p>
+    <p>Price: ₹{{ bus.price }}</p>
+
+    <a href="/select/{{ bus.id }}?date={{ date }}">
+        <button>Select Seats</button>
+    </a>
+
+</div>
+{% endfor %}
+
+</body>
+</html>

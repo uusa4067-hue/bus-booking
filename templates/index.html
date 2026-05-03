@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">🚌 Bus Booking</div>
+
+<div class="search-box">
+<form action="/search" method="POST">
+    <input name="from" placeholder="From" required>
+    <input name="to" placeholder="To" required>
+    <input type="date" name="date" required>
+    <button type="submit">Search</button>
+</form>
+</div>
+
+</body>
+</html>
